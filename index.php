@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION["autenticado"]) || !$_SESSION["autenticado"]) {
+    header("location: ./login.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -5,26 +15,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login QTS</title>
+    <title>Página segura</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        const handleButton = () => {
+            window.location.href = './api/logout.php'
+        }
+    </script>
 </head>
 
 <body>
-    <div class="container">
-        <div>
-            <p class="title">Login</p>
-            <p class="subtitle">Entre com sua senha e e-mail</p>
-        </div>
-
-        <form action="#">
-            <input type="email" />
-            <input type="password" />
-            <button>Login</button>
-        </form>
+    <div class="container login">
+        <p>
+            Usuário autenticado com a matricula <?php echo $_SESSION["matricula"]; ?>
+        </p>
+        <button onclick="handleButton()">Deslogar</button>
     </div>
 </body>
 
-</html>
+</html> 
